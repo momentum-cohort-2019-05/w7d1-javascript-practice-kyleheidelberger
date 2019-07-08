@@ -165,3 +165,53 @@ function minimum(numbers) {
 // Note 2: Selection sort can be implemented using one array. Read the explanation at
 // https://courses.cs.vt.edu/csonline/Algorithms/Lessons/SelectionSort/index.html
 // to see how. This may make more sense to you.
+
+// swap function that takes array and two items in array to swap
+function swap(array, firstIndex, secondIndex) {
+    // declare temporary holding place for value or first item
+    let temp = array[firstIndex];
+    // assign first item to second item's value
+    array[firstIndex] = array[secondIndex];
+    // assign second item to first item's value (that was held in temp)
+    array[secondIndex] = temp;
+}
+
+function selectionSort(array) {
+    // make a copy of original array without modifying it
+    let arrayCopy = array.slice(0);
+    // if array is empty, return empty array
+    if (arrayCopy.length < 1) {
+        return []
+    }
+    // if array has one item, return array
+    else if (arrayCopy.length === 1) {
+        return arrayCopy
+    }
+    // otherwise (if 2 or more items in array), proceed:
+    else {
+        // set variable "len" to number of items in array; declare min
+        let len = arrayCopy.length;
+        let min;
+
+        // for all items in the array, starting from beginning and going to the end
+        for (let i = 0; i < len; i++) {
+
+            //set minimum to this position
+            min = i;
+
+            //check the rest of the array to see if anything is smaller
+            for (let j = i + 1; j < len; j++) {
+                if (arrayCopy[j] < arrayCopy[min]) {
+                    min = j;
+                }
+            }
+
+            //if the minimum isn't in the position, swap it
+            if (i != min) {
+                swap(arrayCopy, i, min);
+            }
+        }
+
+        return arrayCopy;
+    }
+}
